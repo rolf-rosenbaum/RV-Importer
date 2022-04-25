@@ -1,5 +1,4 @@
 #! python3
-
 import openpyxl
 import os
 import tkinter as tk
@@ -11,12 +10,10 @@ root.withdraw()
 filePath = filedialog.askopenfilename()
 index = filePath.rfind('/')
 directory = filePath[:index]
-
 wb = openpyxl.load_workbook(filePath)
 sheet = wb.active
 
 newSheet = wb.copy_worksheet(sheet)
-
 newSheet.insert_cols(3, 1)
 
 for cell in newSheet['C']:
@@ -26,7 +23,6 @@ newSheet['A1'].value = 'code'
 newSheet['B1'].value = 'name'
 newSheet['C1'].value = 'unit'
 newSheet['D1'].value = 'price'
-
 
 for cell in newSheet['B']:
     newVal = str(cell.value).replace(';', ',')
@@ -45,7 +41,6 @@ for row in newSheet.rows:
         line += str(cell.value) + ';'
     line += '\n'
     lines += [line] 
-
 
 csvFile = open(os.path.join(directory, 'katalog.csv'), 'w', newline = '')
 csvFile.writelines(lines)
